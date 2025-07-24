@@ -24,7 +24,7 @@ Window::Window() :
     menu_help_menu(),
     menu_help_about("About"),
 
-    scan("scan/images.jpeg")
+    drawing_on_scan("scan/images.jpeg")
 {
     set_title("Analyse Scanner Cerebral");
     set_default_size(800, 600);
@@ -38,7 +38,7 @@ Window::Window() :
     menu_bar.append(menu_help);
 
     box.pack_start(menu_bar, Gtk::PACK_SHRINK);
-    box.pack_start(scan, Gtk::PACK_EXPAND_WIDGET);
+    box.pack_start(drawing_on_scan, Gtk::PACK_EXPAND_WIDGET);
     add(box);
     show_all_children();
 }
@@ -48,6 +48,10 @@ Window::~Window() {
 
 void Window::on_button_clicked() {
     std::cout << "Hello, World!" << std::endl;
+}
+
+void Window::on_mouse_clicked(GdkEventButton* event) {
+    std::cout << "Mouse clicked at (" << event->x << ", " << event->y << ")" << std::endl;
 }
 
 void Window::init_menu_file() {
@@ -156,5 +160,13 @@ void Window::on_menu_edit_delete() {
 }
 
 void Window::on_menu_help_about() {
-    std::cout << "Help -> About" << std::endl;
+    Gtk::AboutDialog about;
+    about.set_transient_for(*this);
+    about.set_program_name("Analyse Scanner Cerebral");
+    about.set_version("1.0.0");
+    about.set_logo(scan.get_pixbuf());
+    about.set_comments("Analyse Scanner Cerebral est une application de traitement d'images médicales.");
+    about.set_website("https://github.com/P-Pix/Analyse-Scanner-Cerebral");
+    about.run();
+    about.hide();
 }

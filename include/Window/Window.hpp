@@ -5,7 +5,7 @@
 #include <gtkmm.h>
 #include <memory>
 
-#include "Window/Scan.hpp"
+#include "Window/DrawingOnScan.hpp"
 
 class Window : public Gtk::Window {
 public:
@@ -13,6 +13,7 @@ public:
     virtual ~Window();
 protected:
     void on_button_clicked();
+    void on_mouse_clicked(GdkEventButton* event);
 
 private:
 
@@ -64,6 +65,6 @@ private:
 
 #pragma endregion
 
-    Scan scan;
+    DrawingOnScan drawing_on_scan;
     Gtk::Box box;
 };

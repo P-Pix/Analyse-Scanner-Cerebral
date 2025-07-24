@@ -36,3 +36,8 @@ bin
 lib
 these
 scan
+
+# Doxygen
+Doxyfile
+html
+latex
